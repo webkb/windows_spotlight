@@ -1,7 +1,7 @@
 var URL_ROOT = 'https://api.github.com/repos/webkb/windows_spotlight';
 var hui = {};
 
-function xhr(url,call_function) {
+function xhr (url,call_function) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('get', url);
 	xhr.send(null);
@@ -11,7 +11,7 @@ function xhr(url,call_function) {
 		}
 	}
 }
-function xhr_info(url) {
+function xhr_info (url) {
 	xhr(url, function (data) {
 		var innerHTML = '';
 		var items = JSON.parse(data).batchrsp.items;
@@ -35,7 +35,7 @@ function get_list() {
 	xhr(URL_ROOT + '/contents' + '/text', function (data) {
 		hui.con = JSON.parse(data);
 		hui.index = hui.con.length - 1;
-		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = '<br>' + (hui.index + 1) + ' / ' + hui.con.length;
 		xhr_info(hui.con[hui.index].download_url);
 	});
 }

@@ -35,7 +35,7 @@ function get_list() {
 	xhr(URL_ROOT + '/contents' + '/text', function (data) {
 		hui.con = JSON.parse(data);
 		hui.index = hui.con.length - 1;
-		hui.count = '<br>' + (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
 		xhr_info(hui.con[hui.index].download_url);
 	});
 }
@@ -43,14 +43,14 @@ function get_list() {
 function prev() {
 	if (hui.index > 0) {
 		hui.index--;
-		hui.count = '<br>' + (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
 		xhr_info(hui.con[hui.index].download_url);
 	}
 }
 function next() {
 	if (hui.index < hui.con.length - 1) {
 		hui.index++;
-		hui.count = '<br>' + (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
 		xhr_info(hui.con[hui.index].download_url);
 	}
 }

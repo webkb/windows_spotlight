@@ -35,7 +35,11 @@ function get_list() {
 	xhr(URL_ROOT + '/contents' + '/text', function (data) {
 		hui.con = JSON.parse(data);
 		hui.index = hui.con.length - 1;
-		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = "<select onchange=\"goPage(this.value)\">";
+		for (i=1; i<=hui.con.length; i++) {
+			hui.count += "<option value=" + i + ">" + i + "</option>";
+		}
+		hui.count += "</select>";console.log(hui.count);
 		xhr_info(hui.con[hui.index].download_url);
 	});
 }
@@ -43,14 +47,48 @@ function get_list() {
 function prev() {
 	if (hui.index > 0) {
 		hui.index--;
-		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = "<select onchange=\"goPage(this.value)\">";
+		for (i=1; i<=hui.con.length; i++) {
+			if (i == hui.index+1) {
+				hui.count += "<option value=" + i + " selected>" + i + "</option>";
+			} else {
+				hui.count += "<option value=" + i + ">" + i + "</option>";
+			}
+
+		}
+		hui.count += "</select>";
 		xhr_info(hui.con[hui.index].download_url);
 	}
 }
 function next() {
 	if (hui.index < hui.con.length - 1) {
 		hui.index++;
-		hui.count = (hui.index + 1) + ' / ' + hui.con.length;
+		hui.count = "<select onchange=\"goPage(this.value)\">";
+		for (i=1; i<=hui.con.length; i++) {
+			if (i == hui.index+1) {
+				hui.count += "<option value=" + i + " selected>" + i + "</option>";
+			} else {
+				hui.count += "<option value=" + i + ">" + i + "</option>";
+			}
+
+		}
+		hui.count += "</select>";
+		xhr_info(hui.con[hui.index].download_url);
+	}
+}
+function goPage(i) {
+	if (i > 0 && i < hui.con.length - 1) {
+		hui.index = i - 1;
+		hui.count = "<select onchange=\"goPage(this.value)\">";
+		for (i=1; i<=hui.con.length; i++) {
+			if (i == hui.index+1) {
+				hui.count += "<option value=" + i + " selected>" + i + "</option>";
+			} else {
+				hui.count += "<option value=" + i + ">" + i + "</option>";
+			}
+
+		}
+		hui.count += "</select>";
 		xhr_info(hui.con[hui.index].download_url);
 	}
 }
